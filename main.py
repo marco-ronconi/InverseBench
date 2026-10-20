@@ -37,7 +37,7 @@ def main(config):
         problem_name = config.get('problem')['name']
         wandb.init(project=problem_name, group=config.algorithm.name, 
                    config=OmegaConf.to_container(config), 
-                   reinit=True, settings=wandb.Settings(start_method="fork"))
+                   reinit=True)
         config = OmegaConf.create(dict(wandb.config)) # necessary for wandb sweep because wandb.config will be overwritten by sweep agent right after wandb.init
     # set up directory for logging and saving data
     exp_dir = os.path.join(config.problem.exp_dir, config.algorithm.name, config.exp_name)
